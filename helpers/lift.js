@@ -81,4 +81,3 @@ exports.createRoutine = async function(req, res, next) {
     return next(err);
   }
 };
-const test = "test";
