@@ -16,7 +16,7 @@ var logSchema = new mongoose.Schema({
     ref: "User"
   }
 });
-
+//removes log id from User in database
 logSchema.pre("remove", async function(next) {
   try {
     let user = await User.findById(this.user);
