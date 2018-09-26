@@ -22,6 +22,7 @@ app.use("/api/users/:id/logs", loginRequired, ensureCorrectUser, logRoutes);
 app.get("/api/logs", loginRequired, async function(req, res, next) {
   try {
     let logs = await db.Log.find()
+      .populate("movements")
       .sort({ createdAt: "desc" })
       .populate("user", {
         username: true,
