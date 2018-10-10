@@ -5,6 +5,7 @@ var cors = require("cors");
 var authroutes = require("./routes/auth");
 var logRoutes = require("./routes/logs");
 var movementroutes = require("./routes/movements");
+var userRoutes = require("./routes/user");
 var bodyParser = require("body-parser");
 var errorHandler = require("./helpers/error");
 const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
@@ -35,6 +36,7 @@ app.get("/api/logs", loginRequired, async function(req, res, next) {
 });
 
 app.use("/api/users/:id/logs/:logid/movements", movementroutes);
+app.use("/api/users", userRoutes);
 
 app.use(function(req, res, next) {
   let err = new Error("Not Found");
