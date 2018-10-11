@@ -37,12 +37,24 @@ exports.signin = async function(req, res, next) {
 exports.signup = async function(req, res, next) {
   try {
     let user = await db.User.create(req.body);
-    let { id, username, profileImageUrl } = user;
+    let {
+      id,
+      username,
+      profileImageUrl,
+      frontSquat,
+      benchPress,
+      deadLift,
+      overheadPress
+    } = user;
     let token = jwt.sign(
       {
         id,
         username,
-        profileImageUrl
+        profileImageUrl,
+        frontSquat,
+        benchPress,
+        deadLift,
+        overheadPress
       },
       process.env.SECRET_KEY
     );
@@ -50,6 +62,10 @@ exports.signup = async function(req, res, next) {
       id,
       username,
       profileImageUrl,
+      frontSquat,
+      benchPress,
+      deadLift,
+      overheadPress,
       token
     });
   } catch (err) {
