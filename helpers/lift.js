@@ -6,7 +6,15 @@ exports.signin = async function(req, res, next) {
     let user = await db.User.findOne({
       email: req.body.email
     });
-    let { id, username, profileImageUrl } = user;
+    let {
+      id,
+      username,
+      profileImageUrl,
+      frontSquat,
+      benchPress,
+      deadLift,
+      overheadPress
+    } = user;
     let isMatch = await user.comparePassword(req.body.password);
     if (isMatch) {
       let token = jwt.sign(
@@ -21,7 +29,11 @@ exports.signin = async function(req, res, next) {
         id,
         username,
         profileImageUrl,
-        token
+        token,
+        frontSquat,
+        benchPress,
+        deadLift,
+        overheadPress
       });
     } else {
       return next({
